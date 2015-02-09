@@ -1,16 +1,15 @@
-plot2 <- function(file_in = "Data/household_power_consumption.txt")
+plot3 <- function(file_in = "Data/household_power_consumption.txt")
 {
     data <- read_data(file = file_in)
     
     temp <- paste(data$Date, data$Time)
     data$fechahora <- strptime(temp, "%d/%m/%Y %H:%M:%S")
     
-    data$Global_active_power <-  as.numeric(data$Global_active_power) / 1000
-    
     print("plotting...")
     png(file="ExData_Plotting1//plot3.png")
-    plot(data$fechahora, data$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)")
-    
+    plot(data$fechahora, data$Sub_metering_1, type = "l", xlab = "", ylab = "Energy sub metering")
+    lines(data$fechahora, data$Sub_metering_2, type = "l", col= "red")
+    lines(data$fechahora, data$Sub_metering_3, type = "l", col= "blue")
     dev.off()
     
 }
